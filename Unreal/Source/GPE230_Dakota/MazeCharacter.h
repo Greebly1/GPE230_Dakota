@@ -11,6 +11,17 @@ class GPE230_DAKOTA_API AMazeCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
+private:
+	UPROPERTY(EditAnywhere)
+		float moveSpeed;
+	UPROPERTY(EditAnywhere)
+		float rotationSpeed;
+
+private:
+	void MoveFB(float value);
+	void MoveLR(float value);
+	void Rotation(float value);
+
 public:
 	// Sets default values for this character's properties
 	AMazeCharacter();

@@ -3,6 +3,21 @@
 
 #include "MazeCharacter.h"
 
+void AMazeCharacter::MoveFB(float value)
+{
+	AddMovementInput(GetActorForwardVector(), value * moveSpeed);
+}
+
+void AMazeCharacter::MoveLR(float value)
+{
+	AddMovementInput(GetActorRightVector(), value * moveSpeed);
+}
+
+void AMazeCharacter::Rotation(float value)
+{
+	AddControllerYawInput(value * rotationSpeed);
+}
+
 // Sets default values
 AMazeCharacter::AMazeCharacter()
 {
