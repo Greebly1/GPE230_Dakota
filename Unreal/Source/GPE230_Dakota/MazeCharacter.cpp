@@ -18,6 +18,16 @@ void AMazeCharacter::Rotation(float value)
 	AddControllerYawInput(value * rotationSpeed);
 }
 
+// Called to bind functionality to input
+void AMazeCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	PlayerInputComponent->BindAxis(TEXT("MoveFB"), this, &AMazeCharacter::MoveFB);
+	PlayerInputComponent->BindAxis(TEXT("MoveLR"), this, &AMazeCharacter::MoveLR);
+	PlayerInputComponent->BindAxis(TEXT("Rotate"), this, &AMazeCharacter::Rotation);
+}
+
 // Sets default values
 AMazeCharacter::AMazeCharacter()
 {
@@ -39,11 +49,3 @@ void AMazeCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
-
-// Called to bind functionality to input
-void AMazeCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-}
-

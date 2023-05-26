@@ -21,6 +21,7 @@ private:
 	void MoveFB(float value);
 	void MoveLR(float value);
 	void Rotation(float value);
+	
 
 public:
 	// Sets default values for this character's properties

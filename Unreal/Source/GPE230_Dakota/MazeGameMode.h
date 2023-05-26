@@ -21,6 +21,6 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere, NoClear)
-		TSubclassOf<AMazeCharacter> DefaultplayerCharacter = AMazeCharacter::StaticClass();
+		TSubclassOf<AMazeCharacter> DefaultPlayerCharacter = AMazeCharacter::StaticClass();
 	
 };
