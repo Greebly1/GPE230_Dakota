@@ -40,6 +40,7 @@ AMazeCharacter::AMazeCharacter()
 void AMazeCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	currentHealth = maxHealth;
 	
 }
 
@@ -48,4 +49,22 @@ void AMazeCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+float AMazeCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) {
+	//subtracting incoming damage
+	currentHealth -= DamageAmount;
+
+	UE_LOG(LogTemp, Log, TEXT("Player took %f damage. currentHealth = %f"), DamageAmount, currentHealth);
+
+	if (currentHealth <= 0) {
+		currentHealth = 0;
+		Die();
+	}
+
+	return DamageAmount;
+}
+
+void AMazeCharacter::Die() {
+	Destroy();
 }
