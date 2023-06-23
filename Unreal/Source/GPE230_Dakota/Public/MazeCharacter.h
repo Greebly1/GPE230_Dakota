@@ -28,6 +28,10 @@ private:
 		float moveSpeed;
 	UPROPERTY(EditAnywhere)
 		float rotationSpeed;
+	UPROPERTY(EditAnywhere)
+	UAnimSequence* _deathAnim;
+
+	bool _isDead = false;
 
 public:
 	// Sets default values for this character's properties

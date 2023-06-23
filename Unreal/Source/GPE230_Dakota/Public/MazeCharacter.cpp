@@ -52,19 +52,27 @@ void AMazeCharacter::Tick(float DeltaTime)
 }
 
 float AMazeCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) {
-	//subtracting incoming damage
-	currentHealth -= DamageAmount;
+	if (!_isDead) {
+		//subtracting incoming damage
+		currentHealth -= DamageAmount;
 
-	UE_LOG(LogTemp, Log, TEXT("Player took %f damage. currentHealth = %f"), DamageAmount, currentHealth);
+		UE_LOG(LogTemp, Log, TEXT("Player took %f damage. currentHealth = %f"), DamageAmount, currentHealth);
 
-	if (currentHealth <= 0) {
-		currentHealth = 0;
-		Die();
+		if (currentHealth <= 0) {
+			currentHealth = 0;
+			Die();
+		}
+
+		return DamageAmount;
 	}
-
-	return DamageAmount;
+	else return 0;
 }
 
 void AMazeCharacter::Die() {
-	Destroy();
+	_isDead = true;
+	currentHealth = 0;
+	moveSpeed = 0;
+	rotationSpeed = 0;
+
+	GetMesh()->PlayAnimation(_deathAnim, false);
 }
