@@ -35,21 +35,24 @@ void ANPCEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+// Called using animnotify for outgoing attacks
 void ANPCEnemy::DetectHit()
 {
+	//Used so spheretracemulti only calls once
 	bool canDamage = true;
 
 	//Location of fist
 	const FVector PunchLocation = GetMesh()->GetSocketLocation(_PunchingHandSocket);
 
-	//Array of actors ignored by spheretrace, used to ignore self
+	//Array of actors ignored by spheretrace
 	TArray<AActor*> ActorsToIgnore;
-	ActorsToIgnore.Add(this);
-	ActorsToIgnore.Add(GetOwner());
+	ActorsToIgnore.Add(this); //ignore this controller
+	ActorsToIgnore.Add(GetOwner()); //ignore this pawn
 
 	//Array of actors hit by spheretrace
 	TArray<FHitResult> HitArray;
 
+	//Sphere trace located at fist
 	const bool Hit = UKismetSystemLibrary::SphereTraceMulti(GetWorld(), PunchLocation, PunchLocation, _TraceRadius,
 		UEngineTypes::ConvertToTraceType(ECC_Camera), false, ActorsToIgnore, EDrawDebugTrace::None, HitArray,
 		true, FLinearColor::Red, FLinearColor::Green, 2.0f);
@@ -66,8 +69,10 @@ void ANPCEnemy::DetectHit()
 
 				UE_LOG(LogTemp, Log, TEXT("NPCEnemy actor \"%s\" hit other actor \"%s\" , dealing %f damage."), *ownerName, *hitActorName, _HitDamage);
 			
+				//apply damage to target
 				UGameplayStatics::ApplyDamage(HitResult.GetActor(), _HitDamage, GetController(), this, UDamageType::StaticClass());
 
+				//Can't damage until next function call
 				canDamage = false;
 			}
 		}
