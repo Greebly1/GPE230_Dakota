@@ -6,7 +6,7 @@
 void AMazeCharacter::MoveFB(float value)
 {
 	AddMovementInput(GetActorForwardVector(), value * moveSpeed);
-}
+} 
 
 void AMazeCharacter::MoveLR(float value)
 {
@@ -26,6 +26,19 @@ void AMazeCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis(TEXT("MoveFB"), this, &AMazeCharacter::MoveFB);
 	PlayerInputComponent->BindAxis(TEXT("MoveLR"), this, &AMazeCharacter::MoveLR);
 	PlayerInputComponent->BindAxis(TEXT("Rotate"), this, &AMazeCharacter::Rotation);
+}
+
+void AMazeCharacter::spawnStunParticles()
+{
+	if (stunParticles) {
+		USceneComponent* AttachComp = GetDefaultAttachComponent();
+
+		UNiagaraComponent* NiagaraComp = UNiagaraFunctionLibrary::SpawnSystemAttached(stunParticles,
+			AttachComp, NAME_None, FVector(0), FRotator(0),
+			EAttachLocation::KeepRelativeOffset, true);
+
+			NiagaraComp->Activate();
+	}
 }
 
 // Sets default values
@@ -74,5 +87,6 @@ void AMazeCharacter::Die() {
 	moveSpeed = 0;
 	rotationSpeed = 0;
 
+	
 	GetMesh()->PlayAnimation(_deathAnim, false);
 }

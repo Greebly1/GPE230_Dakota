@@ -4,6 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+
+#include "NiagaraFunctionLibrary.h"
+#include "NiagaraComponent.h"
+
 #include "MazeCharacter.generated.h"
 
 UCLASS()
@@ -33,6 +37,9 @@ private:
 
 	bool _isDead = false;
 
+	UPROPERTY(EditAnywhere)
+		UNiagaraSystem* stunParticles;
+
 public:
 	// Sets default values for this character's properties
 	AMazeCharacter();
@@ -41,6 +48,9 @@ private:
 	void MoveFB(float value);
 	void MoveLR(float value);
 	void Rotation(float value);
+	//blueprint node that spawns stun particle system on pawn location
+	UFUNCTION(BlueprintCallable)
+		void spawnStunParticles();
 	
 protected:
 	// Called when the game starts or when spawned
@@ -48,6 +58,7 @@ protected:
 
 	virtual float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
+	//sets movement scalars to 0 and plays death anim
 	virtual void Die(); 
 
 public:	
@@ -56,5 +67,7 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	
 
 };
