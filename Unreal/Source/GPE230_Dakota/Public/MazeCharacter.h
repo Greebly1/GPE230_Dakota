@@ -46,6 +46,11 @@ public:
 	// Sets default values for this character's properties
 	AMazeCharacter();
 
+	UPROPERTY(EditAnywhere)
+		float speedScalarforPowerup;
+	UPROPERTY(EditAnywhere)
+	bool speedBoostActive;
+
 private:
 	void MoveFB(float value);
 	void MoveLR(float value);
@@ -53,6 +58,8 @@ private:
 	//blueprint node that spawns stun particle system on pawn location
 	UFUNCTION(BlueprintCallable)
 		void spawnStunParticles();
+
+	FTimerHandle speedBoostDurationTimerHandle;
 	
 protected:
 	// Called when the game starts or when spawned
@@ -75,5 +82,11 @@ public:
 	float getCurrentHealth();
 
 	float getMaxHealth();
+
+	void enableSpeedBoost(float duration);
+
+	void disableSpeedBoost();
+
+	bool getSpeedBoostEnabled();
 
 };

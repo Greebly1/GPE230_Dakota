@@ -46,6 +46,31 @@ float AMazeCharacter::getMaxHealth()
 	return maxHealth;
 }
 
+void AMazeCharacter::enableSpeedBoost(float duration)
+{
+	if (!speedBoostActive) {
+		UE_LOG(LogTemp, Log, TEXT("Spedboost active"));
+		speedBoostActive = true;
+		moveSpeed *= speedScalarforPowerup;
+		GetWorld()->GetTimerManager().SetTimer(speedBoostDurationTimerHandle, this, &AMazeCharacter::disableSpeedBoost, duration, false);
+	}
+}
+
+void AMazeCharacter::disableSpeedBoost()
+{
+	if (speedBoostActive) {
+		UE_LOG(LogTemp, Log, TEXT("Spedboost inactive"));
+		speedBoostActive = false;
+		moveSpeed /= speedScalarforPowerup;
+		GetWorld()->GetTimerManager().ClearTimer(speedBoostDurationTimerHandle);
+	}
+}
+
+bool AMazeCharacter::getSpeedBoostEnabled()
+{
+	return speedBoostActive;
+}
+
 void AMazeCharacter::spawnStunParticles()
 {
 	if (stunParticles) {

@@ -20,7 +20,6 @@ void APickup::checkActorType(AActor* OverlappedActor, AActor* Otheractor)
 	AMazeCharacter* player = Cast<AMazeCharacter>(Otheractor);
 	//if the pointer is not null then targetActor is aMazeCharacter
 	if (player != nullptr) {
-		UE_LOG(LogTemp, Log, TEXT("Player successfully casted"));
 
 		//if we can apply the powerup
 		if (canApplyPowerup(player)) {
@@ -35,7 +34,6 @@ void APickup::checkActorType(AActor* OverlappedActor, AActor* Otheractor)
 //Heal the player
 void APickup::powerUp(AMazeCharacter* player)
 {
-	UE_LOG(LogTemp, Log, TEXT("Applying powerup"))
 
 		player->addHealth(healAmount);
 }
@@ -45,12 +43,10 @@ void APickup::disablePickup()
 {
 	if (enabled) {
 		if (infiniteRespawn) {
-			UE_LOG(LogTemp, Log, TEXT("infinite respawn true"));
 			//stop overlap events & hide actor
 			triggerBox->SetGenerateOverlapEvents(false);
 			this->SetActorHiddenInGame(true);
 
-			UE_LOG(LogTemp, Log, TEXT("starting timer"));
 			enabled = false;
 			GetWorld()->GetTimerManager().SetTimer(respawnDelayTimerHandle, this, &APickup::enablePickup, respawnTime, false);
 		}
@@ -71,7 +67,6 @@ void APickup::disablePickup()
 //turn on collision and visibility
 void APickup::enablePickup()
 {
-	UE_LOG(LogTemp, Log, TEXT("Enabling pickup"));
 	triggerBox->SetGenerateOverlapEvents(true);
 	this->SetActorHiddenInGame(false);
 	enabled = true;
