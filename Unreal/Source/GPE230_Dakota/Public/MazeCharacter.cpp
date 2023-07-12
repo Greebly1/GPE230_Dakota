@@ -3,6 +3,7 @@
 
 #include "MazeCharacter.h"
 
+
 void AMazeCharacter::MoveFB(float value)
 {
 	AddMovementInput(GetActorForwardVector(), value * moveSpeed);
@@ -26,6 +27,23 @@ void AMazeCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis(TEXT("MoveFB"), this, &AMazeCharacter::MoveFB);
 	PlayerInputComponent->BindAxis(TEXT("MoveLR"), this, &AMazeCharacter::MoveLR);
 	PlayerInputComponent->BindAxis(TEXT("Rotate"), this, &AMazeCharacter::Rotation);
+}
+
+
+void AMazeCharacter::addHealth(float deltaHealth)
+{
+	currentHealth += deltaHealth;
+	if (currentHealth > maxHealth) currentHealth = maxHealth;
+}
+
+float AMazeCharacter::getCurrentHealth()
+{
+	return currentHealth;
+}
+
+float AMazeCharacter::getMaxHealth()
+{
+	return maxHealth;
 }
 
 void AMazeCharacter::spawnStunParticles()

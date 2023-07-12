@@ -18,14 +18,13 @@ public:
 	/// <summary>
 	/// The maximum health of this character
 	/// </summary>
-	UPROPERTY(EditAnywhere)
-		float maxHealth;
+	
 
 protected:
-	/// <summary>
-	/// Current health, set to max health at runtime
-	/// </summary>
-	float currentHealth;
+	
+	
+	UPROPERTY(EditAnywhere)
+		float maxHealth;
 
 private:
 	UPROPERTY(EditAnywhere)
@@ -34,6 +33,9 @@ private:
 		float rotationSpeed;
 	UPROPERTY(EditAnywhere)
 	UAnimSequence* _deathAnim;
+
+	// Current health is initialied to max health on startup
+	float currentHealth;
 
 	bool _isDead = false;
 
@@ -68,6 +70,10 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	
+	void addHealth(float deltaHealth);
+
+	float getCurrentHealth();
+
+	float getMaxHealth();
 
 };
