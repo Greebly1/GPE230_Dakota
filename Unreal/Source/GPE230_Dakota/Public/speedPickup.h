@@ -14,7 +14,7 @@ class GPE230_DAKOTA_API AspeedPickup : public APickup
 {
 	GENERATED_BODY()
 public:
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float boostDuration;
 protected:
 		virtual void powerUp(AMazeCharacter* player) override;

@@ -79,8 +79,10 @@ public:
 
 	void addHealth(float deltaHealth);
 
+	UFUNCTION(BlueprintCallable)
 	float getCurrentHealth();
 
+	UFUNCTION(BlueprintCallable)
 	float getMaxHealth();
 
 	void enableSpeedBoost(float duration);
