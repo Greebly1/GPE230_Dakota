@@ -8,17 +8,14 @@
 #include "NiagaraFunctionLibrary.h"
 #include "NiagaraComponent.h"
 
+#include "Sound/SoundWave.h"
+
 #include "MazeCharacter.generated.h"
 
 UCLASS()
 class GPE230_DAKOTA_API AMazeCharacter : public ACharacter
 {
 	GENERATED_BODY()
-public:
-	/// <summary>
-	/// The maximum health of this character
-	/// </summary>
-	
 
 protected:
 	
@@ -49,7 +46,14 @@ public:
 	UPROPERTY(EditAnywhere)
 		float speedScalarforPowerup;
 	UPROPERTY(EditAnywhere)
-	bool speedBoostActive;
+		bool speedBoostActive;
+	UPROPERTY(EditAnywhere)
+		USoundBase* Sound_GameOver;
+	UPROPERTY(EditAnywhere)
+		USoundBase* Sound_Stun;
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<UUserWidget> Widget_GameOverScreen;
+	UUserWidget* WidgetInstance_GameOverScreen;
 
 private:
 	void MoveFB(float value);

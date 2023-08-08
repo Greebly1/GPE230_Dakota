@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Engine/TriggerBox.h"
 #include "MazeCharacter.h"
+#include "Sound/Soundwave.h"
 #include "Pickup.generated.h"
 
 /**
@@ -46,6 +47,8 @@ public:
 		int respawns;
 	UPROPERTY(EditAnywhere)
 		float respawnTime;
+	UPROPERTY(EditAnywhere)
+		USoundBase* Sound_Pickup;
 
 protected:
 

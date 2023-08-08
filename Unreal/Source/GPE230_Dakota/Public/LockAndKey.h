@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/TriggerBox.h"
+#include "Sound/SoundWave.h"
 #include "LockAndKey.generated.h"
 
 /**
@@ -23,4 +24,6 @@ public:
 		void CheckActorType(class AActor* OverlappedActor, class AActor* Otheractor);
 	UFUNCTION()
 		void OpenTheDoor();
+	UPROPERTY(EditAnywhere)
+		USoundBase* Sound_Pickup;
 };

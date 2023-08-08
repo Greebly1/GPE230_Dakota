@@ -2,6 +2,9 @@
 
 
 #include "MazeCharacter.h"
+#include "Kismet/GameplayStatics.h"
+#include "Sound/SoundWave.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
 
 
 void AMazeCharacter::MoveFB(float value)
@@ -132,4 +135,11 @@ void AMazeCharacter::Die() {
 
 	
 	GetMesh()->PlayAnimation(_deathAnim, false);
+
+	UGameplayStatics::PlaySound2D(GetWorld(), Sound_GameOver, 1.0f, 0.88f);
+	WidgetInstance_GameOverScreen = CreateWidget<UUserWidget>(GetWorld(), Widget_GameOverScreen);
+	WidgetInstance_GameOverScreen->AddToViewport();
+
+	UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = true;
 }

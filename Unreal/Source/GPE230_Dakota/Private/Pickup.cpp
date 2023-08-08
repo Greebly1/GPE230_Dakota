@@ -4,6 +4,7 @@
 #include "Pickup.h"
 #include "MazeCharacter.h"
 #include "Components/ShapeComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 APickup::APickup()
 {
@@ -25,6 +26,7 @@ void APickup::checkActorType(AActor* OverlappedActor, AActor* Otheractor)
 		if (canApplyPowerup(player)) {
 			//apply the powerup
 			powerUp(player);
+			UGameplayStatics::PlaySound2D(GetWorld(), Sound_Pickup, 1.0f, 1.0f);
 			//disable this powerup
 			disablePickup();
 		}
@@ -34,7 +36,6 @@ void APickup::checkActorType(AActor* OverlappedActor, AActor* Otheractor)
 //Heal the player
 void APickup::powerUp(AMazeCharacter* player)
 {
-
 		player->addHealth(healAmount);
 }
 
